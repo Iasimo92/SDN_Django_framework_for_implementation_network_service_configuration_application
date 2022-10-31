@@ -1,0 +1,37 @@
+If you see the above error:
+Traceback (most recent call last):
+  File "/home/iasonas/SDN_Django_framework_for_implementation_network_service_configuration_application/manage.py", line 22, in <module>
+    main()
+  File "/home/iasonas/SDN_Django_framework_for_implementation_network_service_configuration_application/manage.py", line 18, in main
+    execute_from_command_line(sys.argv)
+  File "/usr/local/lib/python3.10/dist-packages/django/core/management/__init__.py", line 381, in execute_from_command_line
+    utility.execute()
+  File "/usr/local/lib/python3.10/dist-packages/django/core/management/__init__.py", line 375, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/usr/local/lib/python3.10/dist-packages/django/core/management/base.py", line 329, in run_from_argv
+    connections.close_all()
+  File "/usr/local/lib/python3.10/dist-packages/django/db/utils.py", line 225, in close_all
+    connection.close()
+  File "/usr/local/lib/python3.10/dist-packages/django/db/backends/sqlite3/base.py", line 190, in close
+    if not self.is_in_memory_db():
+  File "/usr/local/lib/python3.10/dist-packages/django/db/backends/sqlite3/base.py", line 280, in is_in_memory_db
+    return self.creation.is_in_memory_db(self.settings_dict['NAME'])
+  File "/usr/local/lib/python3.10/dist-packages/django/db/backends/sqlite3/creation.py", line 12, in is_in_memory_db
+    return database_name == ':memory:' or 'mode=memory' in database_name
+TypeError: argument of type 'PosixPath' is not iterable
+
+
+Make sure that you imported os in project-level settings.py:
+
+import os
+Add following in DATABASES within settings.py:
+
+'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+In last versions of django, we can do the following settings using str():
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': str(BASE_DIR / "db.sqlite3"),
+    }
+}
