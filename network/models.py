@@ -11,5 +11,8 @@ class Device(models.Model):
     platform = models.CharField(
         max_length=30, choices=(("cisco_ios", "Cisco IOS"), ("cisco_iosxe", "Cisco IOS XE")), blank=True
     )
+    
+    def __str__(self) -> str:
+        return self.name
 
 
