@@ -5,13 +5,14 @@ from .models import Device
 def index(request: HttpRequest) -> HttpResponse:
     devices = Device.objects.all()
     context = {
-        'title': 'Hello user of this network controller',
+        'title': 'Hello! You are using our test controller',
+        
         'devices': devices
     }
     return render(request, 'base.html', context)
 
 
-def get_devices(request: HttpRequest)->HttpResponse:
-    pass
+def device(request: HttpRequest,device_id)->HttpResponse:
+    return HttpResponse(f'{device_id}')
  
 # Create your views here.
