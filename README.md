@@ -4,7 +4,11 @@ The DockerFile is just for testing purposes. The final app will be deployed on D
 
 ***
 
-In order for this app to work connection with devices in needed from local machine and also from containers.
+
+
+***
+
+In order for this app to work connection with devices in needed from local machine and also from containers. Make sure to connect devices to your local PC for testing purposes
 
 ***
 ![Topology](https://github.com/Iasimo92/SDN_Django_framework_for_implementation_network_service_configuration_application/blob/main/connection.png)
