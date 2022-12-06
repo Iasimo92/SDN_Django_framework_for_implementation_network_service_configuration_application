@@ -26,7 +26,11 @@ def get_device_stats(request: HttpRequest,device_id)->HttpResponse:
     optional_args1 = {'secret': 'ericsson'}
     with driver(device.host,device.username,device.password,optional_args=optional_args1) as device_conn:
         interfaces=device_conn.get_interfaces()
+    context = {
+            'device': device,
+            'interfaces': interfaces,
+        }
     print(interfaces)    
-    return HttpResponse(f'{device_id}')
+    return render(request, 'device.html', context)
  
 # Create your views here.

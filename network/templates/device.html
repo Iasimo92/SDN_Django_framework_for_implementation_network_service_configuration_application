@@ -1,0 +1,34 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Awesome network controller</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  
+</head>
+<body>
+  <div class="container">
+    <h1>{{ title }}</h1>
+    
+    
+    <h2>{{device.name}}({{device.host}}) - Interfaces</h2>
+    <table style="width:100%">
+      <tr>
+        <th>Interface name</th>
+        <th>UP</th>
+        <th>Enabled</th>
+      </tr>
+      {% for interface_name, interface in interfaces.items%}
+      <tr>
+        <td>{{ interface_name }}</td>
+        <td><input type="checkbox" {% if interface.is_enabled %}checked{% endif %}>&nbsp;</td>
+        <td><input type="checkbox" {% if interface.is_up %}checked{% endif %}>&nbsp;</td>
+        <td><button type="submit" form="{{ interface_name }}" value="Submit">Switch</button></td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+  
+</body>
+</html>
