@@ -18,8 +18,14 @@
         <th>Interface name</th>
         <th>UP</th>
         <th>Enabled</th>
+        <th>Switch on/off</th>
       </tr>
       {% for interface_name, interface in interfaces.items%}
+      <form action="{% url 'device'  device.id %}" method="post" id="{{ interface_name }}">
+        {% csrf_token %}
+        <input type="hidden" value="{{ interface_name }}" name="interface_name" />
+        <input type="hidden" value="{{ interface.is_enabled|yesno:'False,True' }}" name="enable" />
+      </form>
       <tr>
         <td>{{ interface_name }}</td>
         <td><input type="checkbox" {% if interface.is_enabled %}checked{% endif %}>&nbsp;</td>
