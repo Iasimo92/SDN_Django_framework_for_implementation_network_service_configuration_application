@@ -1,6 +1,16 @@
 from django.db import models
 #Create your models here. We make classes to create models that we can create afterwards in the GUI
 
+NETMIKO_MAPPING = {
+    'cisco_ios': 'cisco_ios',
+    'cisco_iosxe': 'cisco_ios',
+}
+
+NAPALM_MAPPING = {
+    'cisco_ios': 'ios',
+    'cisco_iosxe': 'ios',
+}
+
 class Device(models.Model):
     name = models.CharField(max_length=100)
     host = models.CharField(max_length=70)
@@ -19,6 +29,9 @@ class Device(models.Model):
     @property
     def napalm_driver(self) -> str:
         return NAPALM_MAPPING[self.platform]
+    @property
+    def netmiko_device_type(self) -> str:
+        return NETMIKO_MAPPING[self.platform]
 
 
 

@@ -1,8 +1,10 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpRequest, JsonResponse
+from django.http import HttpResponse, HttpRequest, JsonResponse,HttpResponseRedirect
 from .models import Device
 from netmiko import ConnectHandler
 from napalm import get_network_driver
+
+
 
 NAPALM_MAPPINGS={
     'cisco_ios':'ios',
@@ -13,7 +15,7 @@ NAPALM_MAPPINGS={
 def index(request: HttpRequest) -> HttpResponse:
     devices = Device.objects.all()
     context = {
-        'title': 'Hello! You are using our test controller',
+        'title': 'Controller',
         
         'devices': devices
     }
@@ -32,5 +34,7 @@ def get_device_stats(request: HttpRequest,device_id)->HttpResponse:
         }
     print(interfaces)    
     return render(request, 'device.html', context)
+   
+            
  
 # Create your views here.
