@@ -19,7 +19,10 @@ from . import views
 
 
 urlpatterns = [
-     path('', views.index),
+     path('', views.firstPage),
+     path('manage/',views.index,name="manage"),
+     path('manage2/',views.index2,name="manage2"),
+     path('device/<int:device_id>', views.get_device_stats,name="statistics"),
      path('device/<int:device_id>', views.get_device_stats, name="device"),
      #path('devices', views.get_devices),
 ]
