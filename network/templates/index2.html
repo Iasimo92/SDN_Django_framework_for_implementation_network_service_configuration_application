@@ -5,19 +5,43 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
       {% load static%}
-      <link rel="stylesheet" href="{%static 'style2.css'%}">
+      <link rel="stylesheet" href="{%static 'style.css'%}">
     <link rel="stylesheet" href="sthttps://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/fontawesome.min.css">
 </head>
 
-<body class="index">
-    <section class="header">
-      <nav>
+
          
-          <div class="nav-links">
-            <i class="fa fa-times" ></i>
-              <ul>
-               
-                
+         
+                <body class="index">
+                 
+                    <nav>
+                       
+                        <div class="nav-links">
+                          <i class="fa fa-times" ></i>
+                            <ul>
+                             
+                              <div class="nav-links">
+                                <i class="fa fa-times" ></i>
+                                  <ul>
+                                    <h2>Devices</h2>
+                                    <table style="width:100%">
+                                      <tr>
+                                        <th>Id</th>
+                                        <th>Name</th>
+                                        <th>Host</th>
+                                      </tr>
+                                      {% for device in devices %}
+                                      <tr>
+                                        <td>{{ device.id }}</td>
+                                        <td><a href="{% url 'device_statistics'  device.id %}">{{ device.name }}</a></td>
+                                        <td>{{ device.host }}</td>
+                                      </tr>
+                                      {% endfor %}
+                                    </table>
+                            </ul>
+                        </div>
+                        <i class="fa fa-bars" ></i>
+                    </nav>
                   
                 
               </ul>

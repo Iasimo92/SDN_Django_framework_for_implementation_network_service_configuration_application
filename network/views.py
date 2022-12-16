@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpRequest, JsonResponse,HttpResponseRedi
 from .models import Device
 from netmiko import ConnectHandler
 from napalm import get_network_driver
-
+import sys
 
 
 NAPALM_MAPPINGS={
@@ -22,7 +22,7 @@ def index(request: HttpRequest) -> HttpResponse:
         
         'devices': devices
     }
-    return render(request, 'base.html', context)
+    return render(request, 'base1.html', context)
 
 def index2(request: HttpRequest) -> HttpResponse:
     devices = Device.objects.all()
@@ -47,20 +47,24 @@ def get_device_stats(request: HttpRequest,device_id)->HttpResponse:
         }
     print(interfaces)    
     return render(request, 'device.html', context)
-   
+
 def get_interface_statistics(request: HttpRequest,device_id)->HttpResponse:
-    device=Device.objects.get(pk=device_id)
-    driver=get_network_driver(NAPALM_MAPPINGS[device.platform])
+    devices=Device.objects.get(pk=device_id)
+    driver=get_network_driver(NAPALM_MAPPINGS[devices.platform])
     optional_args1 = {'secret': 'ericsson'}
-    commands=['show interfaces summary']
-    with driver(device.host,device.username,device.password,optional_args=optional_args1) as device_conn:
-        statistics=device.cli(commands)
+    with driver(devices.host,devices.username,devices.password,optional_args=optional_args1) as device_conn:
+        interfaces1=device_conn.get_environment()
     context = {
-            'device': device,
-            'interfaces': statistics,
+            'device': devices,
+            'interfaces': interfaces1,
         }
-    print(statistics)    
-    return render(request, 'base1.html', context)
-               
+    
+    
+    print(interfaces1)
+    return HttpResponse(f'{interfaces1}')
+    #return render(request,'device1.html',context)
+    
+    
+
  
 # Create your views here.
