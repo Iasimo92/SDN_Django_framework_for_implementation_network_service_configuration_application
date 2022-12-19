@@ -61,8 +61,8 @@ def get_interface_statistics(request: HttpRequest,device_id)->HttpResponse:
     
     
     print(interfaces1)
-    return HttpResponse(f'{interfaces1}')
-    #return render(request,'device1.html',context)
+    #return HttpResponse(f'{interfaces1}')
+    return render(request,'device1.html',context)
     
     
 

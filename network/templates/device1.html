@@ -13,22 +13,19 @@
     <h1>{{ title }}</h1>
     
     
-    <h2>{{devices.name}}({{devices.host}}) - HW Resources</h2>
+    <h2>{{device.name}}({{device.host}}) - HW Utilization</h2>
     <table style="width:100%">
       <tr>
-        <th>Temperature</th>
-        <th>Power</th>
-        <th>Fans</th>
+        <th>Interface name</th>
+        <th>UP</th>
+        <th>Enabled</th>
         
       </tr>
-      {#     no .items ↓    #}
-{% for item in interfaces %}
-<tr>
-  {# use item ↓ #}
-  <td>{{ item.is_alert }}</td>
-  <td>{{ item.temperature }}</td>
-</tr>
-{% endfor %}
+      {% for interface_name, interface in interfaces.items%}
+      {{ interface_name }}
+      {{ interface }}
+      </tr>
+      {% endfor %}
     </table>
   </div>
   
