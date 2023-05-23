@@ -4,8 +4,11 @@ from .models import Device
 from netmiko import ConnectHandler
 from napalm import get_network_driver
 import sys
-
-
+from gns3fy import Gns3Connector
+import xml.etree.ElementTree as ET
+import json
+import requests
+from django.http import JsonResponse
 NAPALM_MAPPINGS={
     'cisco_ios':'ios',
     'cisco_iosxe':'ios',
@@ -32,6 +35,15 @@ def index2(request: HttpRequest) -> HttpResponse:
         'devices': devices
     }
     return render(request, 'index2.html', context)
+
+def index3(request: HttpRequest) -> HttpResponse:
+    devices = Device.objects.all()
+    context = {
+        'title': 'Topology',
+        
+        'devices': devices
+    }
+    return render(request, 'index3.html', context)
 
 
 
@@ -63,8 +75,10 @@ def get_interface_statistics(request: HttpRequest,device_id)->HttpResponse:
     print(interfaces1)
     #return HttpResponse(f'{interfaces1}')
     return render(request,'device1.html',context)
-    
-    
+
+
+
+
 
  
 # Create your views here.

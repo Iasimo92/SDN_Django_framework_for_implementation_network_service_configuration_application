@@ -1,7 +1,8 @@
 <h1>{{ device.name }} Interface Statistics</h1>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-  {% load static%}
-  <link rel="stylesheet" href="{%static 'style.css'%}">
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+
 <table>
   <thead>
     <tr>
@@ -11,16 +12,16 @@
   </thead>
   <tbody>
     {% for category, values in interfaces.items %}
-      <tr>
-        <td>{{ category }}</td>
-        <td>
-          <ul>
-            {% for key, value in values.items %}
-              <li>{{ key }}: {{ value }}</li>
-            {% endfor %}
-          </ul>
-        </td>
-      </tr>
+    <tr>
+      <td>{{ category }}</td>
+      <td>
+        <ul>
+          {% for key, value in values.items %}
+          <li>{{ key }}: {{ value }}</li>
+          {% endfor %}
+        </ul>
+      </td>
+    </tr>
     {% endfor %}
   </tbody>
 </table>
