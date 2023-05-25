@@ -96,8 +96,5 @@ def get_interface_statistics(request: HttpRequest,device_id)->HttpResponse:
     return render(request,'device1.html',context)
 
 
-
-
-
  
 # Create your views here.

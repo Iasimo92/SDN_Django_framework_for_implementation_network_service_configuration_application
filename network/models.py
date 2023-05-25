@@ -20,6 +20,7 @@ class Device(models.Model):
     device_type = models.CharField(
         max_length=30, choices=(("router", "Router"), ("switch", "Switch"), ("firewall", "Firewall")), blank=True
     )
+ 
     platform = models.CharField(
         max_length=30, choices=(("cisco_ios", "Cisco IOS"), ("cisco_iosxe", "Cisco IOS XE")), blank=True
     )

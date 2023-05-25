@@ -26,5 +26,7 @@ urlpatterns = [
      path('device_statistics/<int:device_id>', views.get_interface_statistics,name="device_statistics"),
      path('interface_statistics/<int:device_id>', views.get_interfaces_counters, name="interface_statistics"),
      path('device/<int:device_id>', views.get_device_stats, name="device"),
+     
+
      #path('devices', views.get_devices),
 ]
