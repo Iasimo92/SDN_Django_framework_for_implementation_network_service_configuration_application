@@ -1,45 +1,30 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Awesome network controller</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   {% load static%}
   <link rel="stylesheet" href="{%static 'style.css'%}">
+    <title>Device Stats</title>
 </head>
 <body>
-  <div class="container">
-    <h1>{{ title }}</h1>
-    
-    
-    <h2>{{devices.name}}({{devices.host}}) - HW Resources</h2>
-    <table style="width:100%">
-      <tr>
-        <th>Temperature</th>
-        <th>Power</th>
-        <th>Fans</th>
-        
-      </tr>
-      {% for interface_name, interface in interfaces1.items%}
-      <!--<form action="{% url 'device_statistics'  device.id %}" method="post" id="{{ interface_name }}">-->
-        <td>{{ interface_name }}</td>
-        <td>{{ interface.temperature }}</td>
-        <td><input type="checkbox" {% if interface.is_alert %}checked{% endif %}>&nbsp;</td>
-        <td><input type="checkbox" {% if interface.is_critical %}checked{% endif %}>&nbsp;</td>
-        <!--<tr> {% csrf_token %}
-        <input type="hidden" value="{{ interface_name }}" name="interface_name" />
-        <input type="hidden" value="{{ interface.is_alert|yesno:'False,True' }}" name="enable" />
-      </form>
-      <tr>
-        <td>{{ interface_name }}</td>
-        <td><input type="checkbox" {% if interface.is_alert %}checked{% endif %}>&nbsp;</td>
-      <td><input type="checkbox" {% if interface.is_up %}checked{% endif %}>&nbsp;</td>-->
-      
-      </tr>
-      {% endfor %}
+    <table>
+        <thead>
+            <tr>
+                <th>Interface</th>
+                <th>Rx Unicast Packets</th>
+                <th>Rx Octets</th>
+                <!-- Add more table headers as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for interface, stats in device_stats.items %}
+                <tr>
+                    <td>{{ interface }}</td>
+                    <td>{{ stats.rx_unicast_packets }}</td>
+                    <td>{{ stats.rx_octets }}</td>
+                    <!-- Add more table cells as needed -->
+                </tr>
+            {% endfor %}
+        </tbody>
     </table>
-  </div>
-  
 </body>
 </html>

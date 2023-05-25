@@ -23,6 +23,7 @@
         <th>UP</th>
         <th>Enabled</th>
         
+        
       </tr>
       {% for interface_name, interface in interfaces.items%}
       <form action="{% url 'device'  device.id %}" method="post" id="{{ interface_name }}">
