@@ -13,3 +13,11 @@ In order for this app to work connection with devices in needed from local machi
 ***
 ![Topology](https://github.com/Iasimo92/SDN_Django_framework_for_implementation_network_service_configuration_application/blob/main/connection.png)
 
+***
+
+GUI
+
+***
+
+![GUI](https://github.com/Iasimo92/SDN_Django_framework_for_implementation_network_service_configuration_application/blob/main/Screenshot%202023-05-25%20145641.png)
+
