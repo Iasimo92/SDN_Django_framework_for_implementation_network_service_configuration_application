@@ -15,9 +15,21 @@ In order for this app to work connection with devices in needed from local machi
 
 ***
 
-GUI
+GUI first page
 
 ***
 
 ![GUI](https://github.com/Iasimo92/SDN_Django_framework_for_implementation_network_service_configuration_application/blob/main/Screenshot%202023-05-25%20145641.png)
+
+***
+
+GUI supplementary pages
+
+***
+![GUI](https://github.com/Iasimo92/SDN_Django_framework_for_implementation_network_service_configuration_application/blob/main/controller.png)
+***
+
+![GUI](https://github.com/Iasimo92/SDN_Django_framework_for_implementation_network_service_configuration_application/blob/main/statistics.png)
+
+***
 
