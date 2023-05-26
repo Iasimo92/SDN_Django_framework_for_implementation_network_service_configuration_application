@@ -1,65 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="with=device-width,initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
-      {% load static%}
-      <link rel="stylesheet" href="{%static 'style.css'%}">
-    <link rel="stylesheet" href="sthttps://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/fontawesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/fontawesome.min.css">
 </head>
-
-
-         
-         
-                <body class="index">
-                 
-                    <nav>
-                       
-                        <div class="nav-links">
-                          <i class="fa fa-times" ></i>
-                            <ul>
-                             
-                              <div class="nav-links">
-                                <i class="fa fa-times" ></i>
-                                  <ul>
-                                    <h2>Devices</h2>
-                                    <table style="width:100%">
-                                      <tr>
-                                        <th>Id</th>
-                                        <th>Name</th>
-                                        <th>Host</th>
-                                      </tr>
-                                      {% for device in devices %}
-                                      <tr>
-                                        <td>{{ device.id }}</td>
-                                        <td><a href="{% url 'device_statistics'  device.id %}">{{ device.name }}</a></td>
-                                        <td>{{ device.host }}</td>
-                                      </tr>
-                                      {% endfor %}
-                                    </table>
-                            </ul>
-                        </div>
-                        <i class="fa fa-bars" ></i>
-                    </nav>
-                  
-                
-              </ul>
-          </div>
-          <i class="fa fa-bars" ></i>
-      </nav>
-    
+<body class="index">
+    <nav>
+        <div class="nav-links">
+            <i class="fa fa-times"></i>
+            <ul>
+                <h2>Devices</h2>
+                <table>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Host</th>
+                    </tr>
+                    {% for device in devices %}
+                    <tr>
+                        <td>{{ device.id }}</td>
+                        <td><a href="{% url 'device_statistics' device.id %}">{{ device.name }}</a></td>
+                        <td>{{ device.host }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </ul>
+        </div>
+        <i class="fa fa-bars"></i>
+    </nav>
     <div class="text-box">
-      <h1>Device Statistics</h1>
-       <p>
-     
-       
-      </div>
-
-      
-
-    </section>
-
-
+        <h1>Device Statistics</h1>
+        <p></p>
+    </div>
 </body>
 </html>
