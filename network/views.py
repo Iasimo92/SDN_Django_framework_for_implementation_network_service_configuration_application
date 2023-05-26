@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse, HttpRequest, JsonResponse,HttpResponseRedirect
 from .models import Device
 from netmiko import ConnectHandler
@@ -10,8 +10,10 @@ import json
 import requests
 from django.http import JsonResponse
 from celery.result import AsyncResult
-
+from django.contrib import messages
+import subprocess
 from .models import Device
+from pysnmp.hlapi import *
 
 NAPALM_MAPPINGS={
     'cisco_ios':'ios',
@@ -96,5 +98,4 @@ def get_interface_statistics(request: HttpRequest,device_id)->HttpResponse:
     return render(request,'device1.html',context)
 
 
- 
 # Create your views here.
