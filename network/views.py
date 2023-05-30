@@ -4,7 +4,7 @@ from .models import Device
 from netmiko import ConnectHandler
 from napalm import get_network_driver
 import sys
-from gns3fy import Gns3Connector
+
 import xml.etree.ElementTree as ET
 import json
 import requests

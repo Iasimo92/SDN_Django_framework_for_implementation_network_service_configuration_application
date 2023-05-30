@@ -33,5 +33,3 @@ urllib3==1.23
 pysnmp==4.4.12
 celery==5.2.0
 MarkupSafe==2.0.1
-
-
