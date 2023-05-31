@@ -8,6 +8,9 @@ CONTAINER ID   IMAGE         COMMAND                  CREATED        STATUS     
 root@TEST:/home/iasonas#
 root@TEST:/home/iasonas# docker run -p 8000:8000 mydjangoapp
 
+Build the image docker build -t djangoapp .
+Run the container docker run -p 80:8000 djangoapp
+
 
 ***
 
