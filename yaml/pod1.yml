@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+   name: djangotestapp
+spec:
+   containers:
+   - name: djangotestapp
+     image: iasonasi/djangotestapp:latest
+     ports:
+     - containerPort: 8000
+
