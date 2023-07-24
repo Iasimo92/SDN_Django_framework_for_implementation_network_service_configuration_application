@@ -63,7 +63,25 @@
                     <li><a href="{% url 'manage' %}">Devices</a></li>
                     <li><a href="{% url 'manage2' %}">Statistics</a></li>
                     <li><a href="{% url 'manage3' %}">Interface Statistics</a></li>
-                    
+                    <li>
+                        <!-- Add the form for script execution -->
+                        <form action="{% url 'execute_script' %}" method="post">
+                            {% csrf_token %}
+                            <label for="remote_host">Remote Host:</label>
+                            <input type="text" id="remote_host" name="remote_host" required><br>
+
+                            <label for="remote_user">Remote User:</label>
+                            <input type="text" id="remote_user" name="remote_user" required><br>
+
+                            <label for="remote_password">Remote Password:</label>
+                            <input type="password" id="remote_password" name="remote_password" required><br>
+
+                            <label for="remote_script_path">Script Path:</label>
+                            <input type="text" id="remote_script_path" name="remote_script_path" required><br>
+
+                            <button type="submit">Execute Script on Remote Linux Machine</button>
+                        </form>
+                    </li>
                     <li><a href="destinations.html">Under Construction</a></li>
                     <li><a href="test7.html">Under Construction</a></li>
                     <li><a href="login.html">Under Construction</a></li>

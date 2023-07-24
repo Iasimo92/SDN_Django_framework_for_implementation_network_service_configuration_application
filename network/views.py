@@ -4,7 +4,7 @@ from .models import Device
 from netmiko import ConnectHandler
 from napalm import get_network_driver
 import sys
-
+import paramiko
 import xml.etree.ElementTree as ET
 import json
 import requests
@@ -14,6 +14,9 @@ from django.contrib import messages
 import subprocess
 from .models import Device
 from pysnmp.hlapi import *
+from fabric import Connection
+import logging
+import subprocess
 
 NAPALM_MAPPINGS={
     'cisco_ios':'ios',
@@ -98,4 +101,43 @@ def get_interface_statistics(request: HttpRequest,device_id)->HttpResponse:
     return render(request,'device1.html',context)
 
 
-# Create your views here.
+def execute_script_on_remote(request):
+    if request.method == 'POST':
+        remote_host = request.POST.get("remote_host")
+        remote_user = request.POST.get("remote_user")
+        remote_password = request.POST.get("remote_password")
+        remote_script_path = request.POST.get("remote_script_path")
+
+        try:
+            # Establish SSH connection to the remote machine
+            ssh_client = paramiko.SSHClient()
+            ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+            ssh_client.connect(remote_host, username=remote_user, password=remote_password)
+
+            # Execute the script remotely with sudo
+            command = f'sudo -S bash {remote_script_path}'
+            stdin, stdout, stderr = ssh_client.exec_command(command)
+            stdin.write(remote_password + '\n')
+            stdin.flush()
+
+            # Optionally, you can wait for the command to finish and get the output
+            exit_status = stdout.channel.recv_exit_status()
+            output = stdout.read().decode('utf-8')
+            error = stderr.read().decode('utf-8')
+
+            ssh_client.close()
+
+            if exit_status != 0:
+                # Handle error case
+                return JsonResponse({'status': 'error', 'message': f"Error executing the script: {error}"})
+            else:
+                # Process the output if needed
+                return JsonResponse({'status': 'success', 'message': "Script executed successfully", 'output': output})
+
+        except Exception as e:
+            # Handle exceptions
+            return JsonResponse({'status': 'error', 'message': f"Error connecting to the remote machine: {str(e)}"})
+
+    else:
+        # Return an error response for invalid request method (GET)
+        return JsonResponse({'status': 'error', 'message': 'Invalid request method. Use POST method for script execution.'})
