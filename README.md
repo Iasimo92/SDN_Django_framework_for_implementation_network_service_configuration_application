@@ -43,3 +43,4 @@ GUI supplementary pages
 
 ***
 
+The repo will updated with more features in order to addopt also kubernetes deployment.
