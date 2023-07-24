@@ -29,7 +29,7 @@ GUI first page
 
 ***
 
-![GUI](https://github.com/Iasimo92/SDN_Django_framework_for_implementation_network_service_configuration_application/blob/main/Screenshot%202023-05-25%20145641.png)
+![GUI](https://github.com/Iasimo92/SDN_Django_framework_for_implementation_network_service_configuration_application/blob/main/Screenshot%202023-07-24%20123620.png)
 
 ***
 
