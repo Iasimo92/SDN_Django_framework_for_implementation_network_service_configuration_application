@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#A bash script to create 3 simple network namespaces
 for i in 1 2 3
 do
   ip netns add h$i
