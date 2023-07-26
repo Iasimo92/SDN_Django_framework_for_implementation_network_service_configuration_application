@@ -18,7 +18,7 @@ Run the container docker run -p 80:8000 djangoapp
 
 ***
 
-In order for this app to work connection with devices in needed from local machine and also from containers. Make sure to connect devices to your local PC for testing purposes
+In order for this app to work connection with devices in needed from local machine and also from containers. Make sure to connect devices to your local PC for testing purposes. Naming, users, ips and password are only applicable in our test LAB environment. So you have to adapt to local LAN environment
 
 ***
 ![Topology](https://github.com/Iasimo92/SDN_Django_framework_for_implementation_network_service_configuration_application/blob/main/connection.png)
