@@ -11,36 +11,4 @@ root@TEST:/home/iasonas# docker run -p 8000:8000 mydjangoapp
 Build the image docker build -t djangoapp .
 Run the container docker run -p 80:8000 djangoapp
 
-
-***
-
-
-
-***
-
-In order for this app to work connection with devices in needed from local machine and also from containers. Make sure to connect devices to your local PC for testing purposes. Naming, users, ips and password are only applicable in our test LAB environment. So you have to adapt to local LAN environment
-
-***
-![Topology](https://github.com/Iasimo92/SDN_Django_framework_for_implementation_network_service_configuration_application/blob/main/connection.png)
-
-***
-
-GUI first page
-
-***
-
-![GUI](https://github.com/Iasimo92/SDN_Django_framework_for_implementation_network_service_configuration_application/blob/main/Screenshot%202023-07-24%20123620.png)
-
-***
-
-GUI supplementary pages
-
-***
-![GUI](https://github.com/Iasimo92/SDN_Django_framework_for_implementation_network_service_configuration_application/blob/main/controller.png)
-***
-
-![GUI](https://github.com/Iasimo92/SDN_Django_framework_for_implementation_network_service_configuration_application/blob/main/statistics.png)
-
-***
-
 The repo will updated with more features in order to addopt also kubernetes deployment.
