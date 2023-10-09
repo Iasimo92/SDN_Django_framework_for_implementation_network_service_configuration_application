@@ -54,6 +54,15 @@ def index3(request: HttpRequest) -> HttpResponse:
     }
     return render(request, 'index3.html', context)
 
+def index4(request: HttpRequest) -> HttpResponse:
+    devices = Device.objects.all()
+    context = {
+        'title': 'Backup running config',
+        
+        'devices': devices
+    }
+    return render(request, 'index4.html', context)
+
 def get_device_stats(request: HttpRequest,device_id)->HttpResponse:
     device=Device.objects.get(pk=device_id)
     driver=get_network_driver(NAPALM_MAPPINGS[device.platform])
@@ -100,7 +109,33 @@ def get_interface_statistics(request: HttpRequest,device_id)->HttpResponse:
     #return HttpResponse(f'{interfaces1}')
     return render(request,'device1.html',context)
 
+def get_running_config(request, device_id):
+    # Get the Device object by its ID
+    device = get_object_or_404(Device, pk=device_id)
 
+    # Define the NAPALM driver and optional arguments
+    driver = get_network_driver('ios')  # Assuming Cisco IOS
+    optional_args = {'secret': device.secret}
+
+    try:
+        # Connect to the device using the regular password
+        with driver(hostname=device.host, username=device.username, password=device.password, optional_args=optional_args) as device_conn:
+            # Retrieve the running configuration
+            running_config = device_conn.get_config('running')
+
+        # Create the context with the device and running configuration
+        context = {
+            'device': device,
+            'running_config': running_config,
+        }
+
+        # Render the running_config.html template with the context
+        return render(request, 'running_config.html', context)
+
+    except Exception as e:
+        # Handle any exceptions that may occur during the connection or retrieval
+        error_message = f"An error occurred: {str(e)}"
+        return HttpResponse(error_message)
 def execute_script_on_remote(request):
     if request.method == 'POST':
         remote_host = request.POST.get("remote_host")
