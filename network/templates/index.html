@@ -7,51 +7,7 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'style2.css' %}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/fontawesome.min.css">
-    <style>
-        /* Additional styles for improved appearance */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
-        
-        .header {
-            background-color: #f1f1f1;
-            padding: 20px;
-        }
-        
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .nav-links ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-        }
-        
-        .nav-links ul li {
-            margin-left: 10px;
-        }
-        
-        .text-box {
-            text-align: center;
-            margin-top: 100px;
-        }
-        
-        h1 {
-            font-size: 28px;
-            margin-bottom: 10px;
-        }
-        
-        p {
-            font-size: 16px;
-            color: #777;
-        }
-    </style>
+    
 </head>
 
 <body class="index">
@@ -63,25 +19,7 @@
                     <li><a href="{% url 'manage' %}">Devices</a></li>
                     <li><a href="{% url 'manage2' %}">Statistics</a></li>
                     <li><a href="{% url 'manage3' %}">Interface Statistics</a></li>
-                    <li>
-                        <!-- Add the form for script execution -->
-                        <form action="{% url 'execute_script' %}" method="post">
-                            {% csrf_token %}
-                            <label for="remote_host">Remote Host:</label>
-                            <input type="text" id="remote_host" name="remote_host" required><br>
-
-                            <label for="remote_user">Remote User:</label>
-                            <input type="text" id="remote_user" name="remote_user" required><br>
-
-                            <label for="remote_password">Remote Password:</label>
-                            <input type="password" id="remote_password" name="remote_password" required><br>
-
-                            <label for="remote_script_path">Script Path:</label>
-                            <input type="text" id="remote_script_path" name="remote_script_path" required><br>
-
-                            <button type="submit">Execute Script on Remote Linux Machine</button>
-                        </form>
-                    </li>
+                    
                     <li><a href="{% url 'manage4' %}">Running config</a></li>
                     <li><a href="test7.html">Under Construction</a></li>
                     <li><a href="login.html">Under Construction</a></li>

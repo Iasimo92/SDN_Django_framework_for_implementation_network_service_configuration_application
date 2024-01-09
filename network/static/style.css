@@ -3,23 +3,44 @@ body {
   padding: 0;
   font-family: sans-serif;
   background: #34495e;
+  color: white; /* Set default text color to white */
 }
 
 .container {
-  width: 600px; /* Increase width */
-  padding: 120px; /* Increase padding */
+  width: 600px;
+  padding: 120px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background: #191919;
   text-align: center;
+  color: white; /* Set text color to white */
 }
 
 .container h1 {
   color: white;
   text-transform: uppercase;
   font-weight: 500;
+}
+
+.container table {
+  width: 100%;
+  border-collapse: collapse;
+  color: white; /* Set text color for the table */
+}
+
+.container th, .container td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  color: white; /* Set text color for table cells */
+}
+
+.container th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  color: black; /* Set text color for table header cells */
 }
 
 .container input[type="text"],
@@ -31,7 +52,7 @@ body {
   text-align: center;
   border: 2px solid #3498db;
   padding: 14px 10px;
-  width: 300px; /* Increase width */
+  width: 300px;
   outline: none;
   color: white;
   border-radius: 24px;
@@ -40,7 +61,7 @@ body {
 
 .container input[type="text"]:focus,
 .container input[type="password"]:focus {
-  width: 380px; /* Increase width */
+  width: 380px;
   border-color: #2ecc71;
 }
 
