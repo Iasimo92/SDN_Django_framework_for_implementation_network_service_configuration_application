@@ -28,7 +28,10 @@ urlpatterns = [
      path('device/<int:device_id>', views.get_device_stats, name="device"),
      path('execute_script/', views.execute_script_on_remote, name='execute_script'),
      path('manage4/',views.index4,name="manage4"),
+     path('manage5/',views.index5,name="manage5"),
      path('running_config/<int:device_id>', views.get_running_config, name="running_config"),
+     path('show_running_config/<int:device_id>/', views.show_running_config, name='show_running_config'),
+
 
      #path('devices', views.get_devices),
 ]

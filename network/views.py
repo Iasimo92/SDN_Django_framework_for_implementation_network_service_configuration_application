@@ -4,6 +4,7 @@ from .models import Device
 from netmiko import ConnectHandler
 from napalm import get_network_driver
 import sys
+import os
 import paramiko
 import xml.etree.ElementTree as ET
 import json
@@ -62,6 +63,15 @@ def index4(request: HttpRequest) -> HttpResponse:
         'devices': devices
     }
     return render(request, 'index4.html', context)
+
+def index5(request: HttpRequest) -> HttpResponse:
+    devices = Device.objects.all()
+    context = {
+        'title': 'Backup running config',
+        
+        'devices': devices
+    }
+    return render(request, 'index5.html', context)
 
 def get_device_stats(request: HttpRequest,device_id)->HttpResponse:
     device=Device.objects.get(pk=device_id)
@@ -176,3 +186,63 @@ def execute_script_on_remote(request):
     else:
         # Return an error response for invalid request method (GET)
         return JsonResponse({'status': 'error', 'message': 'Invalid request method. Use POST method for script execution.'})
+
+
+def get_running_config(device):
+    ssh_client = paramiko.SSHClient()
+    ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+
+    try:
+        ssh_client.connect(hostname=device.host, username=device.username, password=device.password)
+        stdin, stdout, stderr = ssh_client.exec_command('show running-config')
+        running_config = stdout.read().decode("utf-8")
+
+        ssh_client.close()
+        return running_config
+
+    except paramiko.AuthenticationException:
+        return "Authentication failed"
+    except paramiko.SSHException as e:
+        return f"SSH error: {e}"
+    except Exception as e:
+        return f"Error: {e}"
+
+def show_running_config(request, device_id):
+    try:
+        device = Device.objects.get(id=device_id)
+        
+        netmiko_device = {
+            'device_type': 'cisco_ios',
+            'ip': device.host,
+            'username': device.username,
+            'password': device.password,
+            'secret': device.secret,  # Assuming 'enable_password' is the secret for enable mode
+        }
+
+        with ConnectHandler(**netmiko_device) as ssh:
+            ssh.enable()
+            running_config = ssh.send_command("show running-config")
+
+            if running_config:
+                directory = 'configs'
+                if not os.path.exists(directory):
+                    os.makedirs(directory)
+
+                filename = os.path.join(directory, f"{device.name}_running_config.txt")
+
+                with open(filename, 'w') as file:
+                    file.write(running_config)
+            else:
+                return HttpResponse("Running configuration is empty", status=500)
+
+        context = {
+            'device': device,
+            'running_config': running_config,
+        }
+
+        return HttpResponse(running_config)
+
+    except Device.DoesNotExist:
+        return HttpResponse("Device not found", status=404)
+    except Exception as e:
+        return HttpResponse(f"An error occurred: {str(e)}", status=500)
