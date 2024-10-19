@@ -33,6 +33,7 @@ class Device(models.Model):
     @property
     def netmiko_device_type(self) -> str:
         return NETMIKO_MAPPING[self.platform]
+    
 
 
 

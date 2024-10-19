@@ -5,6 +5,7 @@ from netmiko import ConnectHandler
 from napalm import get_network_driver
 import sys
 import os
+from .forms import DeviceConfigForm
 import paramiko
 import xml.etree.ElementTree as ET
 import json
@@ -15,7 +16,7 @@ from django.contrib import messages
 import subprocess
 from .models import Device
 from pysnmp.hlapi import *
-from fabric import Connection
+#from fabric import Connection
 import logging
 import subprocess
 
@@ -246,3 +247,45 @@ def show_running_config(request, device_id):
         return HttpResponse("Device not found", status=404)
     except Exception as e:
         return HttpResponse(f"An error occurred: {str(e)}", status=500)
+
+
+def configure_ip(request):
+    if request.method == 'POST':
+        form = DeviceConfigForm(request.POST)
+        if form.is_valid():
+            hostname = form.cleaned_data['hostname']
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            interface = form.cleaned_data['interface']
+            ip_address = form.cleaned_data['ip_address']
+            subnet_mask = form.cleaned_data['subnet_mask']
+
+            cisco_device = {
+                'device_type': 'cisco_ios',
+                'host': hostname,
+                'username': username,
+                'password': password,
+                'secret': password,
+            }
+
+            try:
+                net_connect = ConnectHandler(**cisco_device)
+                net_connect.enable()
+
+                commands = [
+                    f"interface {interface}",
+                    f"ip address {ip_address} {subnet_mask}",
+                    "no shutdown",
+                ]
+
+                output = net_connect.send_config_set(commands)
+                net_connect.disconnect()
+
+                return HttpResponse(f"Device configured successfully. Output:\n{output}")
+
+            except Exception as e:
+                return HttpResponse(f"Error configuring device: {str(e)}")
+    else:
+        form = DeviceConfigForm()
+
+    return render(request, 'device_config/configure_ip.html', {'form': form})

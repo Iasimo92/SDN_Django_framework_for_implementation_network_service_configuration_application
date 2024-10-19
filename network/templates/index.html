@@ -7,7 +7,6 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'style2.css' %}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/fontawesome.min.css">
-    
 </head>
 
 <body class="index">
@@ -19,10 +18,11 @@
                     <li><a href="{% url 'manage' %}">Devices</a></li>
                     <li><a href="{% url 'manage2' %}">Statistics</a></li>
                     <li><a href="{% url 'manage3' %}">Interface Statistics</a></li>
-                    
                     <li><a href="{% url 'manage4' %}">Running config</a></li>
                     <li><a href="{% url 'manage5' %}">Backup</a></li>
-                    <li><a href="login.html">Under Construction</a></li>
+                    <li><a href="{% url 'configure_ip' %}">Configure IP</a></li>
+                    <!-- New List Item for IP Configuration -->
+                  
                 </ul>
             </div>
             <i class="fa fa-bars"></i>
@@ -30,7 +30,6 @@
     
         <div class="text-box">
             <h1>Welcome to our Network Controller</h1>
-            
         </div>
     </section>
 </body>

@@ -20,6 +20,7 @@ from . import views
 
 urlpatterns = [
      path('', views.firstPage),
+     path('configure-ip/', views.configure_ip, name='configure_ip'),
      path('manage/',views.index,name="manage"),
      path('manage2/',views.index2,name="manage2"),
      path('manage3/',views.index3,name="manage3"),
