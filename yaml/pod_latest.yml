@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+   name: django
+spec:
+   containers:
+   - name: django
+     image: iasonasi/django_thesis
+     ports:
+     - containerPort: 8000
+
