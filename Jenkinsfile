@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             
             steps {
-                sh 'sudo docker build -t iasimo92/djangojenkins:latest .'
+                sh 'docker build -t iasimo92/djangojenkins:latest .'
             }
         }
     }
