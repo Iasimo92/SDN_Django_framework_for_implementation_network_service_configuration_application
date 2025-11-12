@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             
             steps {
-                sh 'docker build -t DjangoJenkins'
+                sh 'docker build -t DjangoJenkins .'
             }
         }
     }
